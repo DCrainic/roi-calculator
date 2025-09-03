@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ROI-Rechner – entitys.io</title>
+<style>
+  :root{--ink:#2a3f5f;--mut:#6b7280;--pri:#10b981;--sec:#e5e7eb;--bg:#f7f8fb;--card:#fff}
+  *{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif}
+  body{margin:0;background:var(--bg);color:var(--ink)}
+  .wrap{max-width:980px;margin:24px auto;padding:0 14px}
+  .card{background:var(--card);border:1px solid #eef2f7;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.06)}
+  .pad{padding:16px}
+  h3{margin:16px 0 12px;text-align:center}
+  .grid{display:grid;gap:16px}
+  @media(min-width:960px){.grid{grid-template-columns:1fr 1fr}}
+  .row{display:grid;grid-template-columns:auto 90px auto;gap:8px;align-items:center;margin:8px 0}
+  .row input[type=number]{width:90px;padding:10px;border:1px solid var(--sec);border-radius:10px}
+  .row .full{grid-column:1/-1}
+  .range{width:100%}
+  .group h5{margin:8px 0 6px}
+  .rad{display:flex;flex-wrap:wrap;gap:8px}
+  .rad input{display:none}
+  .rad label{border:1px solid var(--pri);color:var(--pri);padding:8px 12px;border-radius:999px;cursor:pointer}
+  .rad input:checked+label{background:var(--pri);color:#fff}
+  .kpi{display:flex;justify-content:space-between;padding:6px 0}
+  .badge{display:inline-block;background:#e9fff7;color:#0b8c66;border:1px solid #a7f3d0;padding:6px 12px;border-radius:999px}
+  .progress{height:14px;background:var(--sec);border-radius:999px;overflow:hidden}
+  .bar{height:100%}
+  .s{background:#334155}
+  .e{background:#14b8a6}
+  .labels{display:flex;justify-content:space-between;font-size:12px;color:var(--mut);margin-top:4px}
+  .mut{color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card pad">
+    <h3>Einsparmöglichkeiten im Stammdatenmanagement durch den Einsatz von entitys.io</h3>
+    <div class="grid">
+
+      <!-- LEFT: Inputs -->
+      <section class="card pad">
+        <div class="row">
+          <div>Stammdatenmanagement</div>
+          <input id="w" type="number" min="0" max="20" step="1" value="0">
+          <div>Personen</div>
+          <div class="full"><input id="wR" class="range" type="range" min="0" max="20" value="0"></div>
+        </div>
+
+        <div class="row">
+          <div>Vollkosten €</div>
+          <input id="p" type="number" min="1" max="120" step="1" value="60">
+          <div>k</div>
+          <div class="full"><input id="pR" class="range" type="range" min="1" max="120" value="60"></div>
+        </div>
+
+        <div class="group">
+          <h5>Aktueller Automatisierungsgrad</h5>
+
+          <div class="mut" style="margin-bottom:4px">Daten Import</div>
+          <div class="rad" id="g1">
+            <input checked id="g1a" name="g1" type="radio" value="0"><label for="g1a">Niedrig</label>
+            <input id="g1b" name="g1" type="radio" value="1"><label for="g1b">Mittel</label>
+            <input id="g1c" name="g1" type="radio" value="2"><label for="g1c">Hoch</label>
+            <input id="g1d" name="g1" type="radio" value="3"><label for="g1d">Deaktivieren</label>
+          </div>
+
+          <div class="mut" style="margin:10px 0 4px">Daten Bearbeitung</div>
+          <div class="rad" id="g2">
+            <input checked id="g2a" name="g2" type="radio" value="0"><label for="g2a">Niedrig</label>
+            <input id="g2b" name="g2" type="radio" value="1"><label for="g2b">Mittel</label>
+            <input id="g2c" name="g2" type="radio" value="2"><label for="g2c">Hoch</label>
+            <input id="g2d" name="g2" type="radio" value="3"><label for="g2d">Deaktivieren</label>
+          </div>
+
+          <div class="mut" style="margin:10px 0 4px">Daten Export</div>
+          <div class="rad" id="g3">
+            <input checked id="g3a" name="g3" type="radio" value="0"><label for="g3a">Niedrig</label>
+            <input id="g3b" name="g3" type="radio" value="1"><label for="g3b">Mittel</label>
+            <input id="g3c" name="g3" type="radio" value="2"><label for="g3c">Hoch</label>
+            <input id="g3d" name="g3" type="radio" value="3"><label for="g3d">Deaktivieren</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: Output -->
+      <section class="card pad">
+        <div class="kpi"><span>Personalkosten im Stammdatenmanagement</span><span id="cost">€0</span></div>
+        <div class="kpi"><span>Ø Automatisierungsgrad</span><span id="lvl">Niedrig</span></div>
+
+        <div style="text-align:center;margin:12px 0">
+          <span id="save" class="badge">Einsparpotenzial: €0k p.a.</span>
+        </div>
+
+        <div style="margin-top:20px">
+          <div class="mut" style="text-align:center;margin-bottom:6px">Time-to-market</div>
+          <div class="progress"><div id="tqs" class="bar s" style="width:30%"></div><div id="tqe" class="bar e" style="width:60%"></div></div>
+          <div class="labels"><span>Status quo</span><span>Verbesserung</span></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="mut" style="text-align:center;margin-bottom:6px">Qualität</div>
+          <div class="progress"><div id="qqs" class="bar s" style="width:30%"></div><div id="qqe" class="bar e" style="width:56%"></div></div>
+          <div class="labels"><span>Status quo</span><span>Verbesserung</span></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // Helpers
+  const $=q=>document.querySelector(q);
+  const gv=g=>+document.querySelector('input[name="'+g+'"]:checked').value;
+  const lvlTxt=["Niedrig","Mittel","Hoch","Deaktiviert"];
+  const map=[.30,.45,.60,0]; // savings share by level
+
+  // Slider <-> number syncing
+  function link(a,b){a.oninput=()=>{b.value=a.value;calc()};b.oninput=()=>{a.value=b.value;calc()}}
+  link($("#w"),$("#wR")); link($("#p"),$("#pR"));
+  ["g1","g2","g3"].forEach(id=>document.getElementById(id).oninput=calc);
+
+  function calc(){
+    const workers=+$("#w").value||0;
+    const pay=+$("#p").value||0;
+    const eff=(map[gv("g1")]+map[gv("g2")]+map[gv("g3")])/3;
+    const cost=workers*pay*1000;
+    const save=cost*eff;
+
+    $("#cost").textContent="€"+cost.toLocaleString("de-DE");
+    const idx=Math.max(gv("g1"),gv("g2"),gv("g3"))===3?3:eff<.38?0:eff<.53?1:2;
+    $("#lvl").textContent=lvlTxt[idx];
+    $("#save").textContent="Einsparpotenzial: €"+Math.round(save/1000).toLocaleString("de-DE")+"k p.a.";
+
+    // progress bars (simple impression)
+    $("#tqe").style.width=Math.min(100,30+eff*70)+"%";
+    $("#qqe").style.width=Math.min(100,30+eff*60)+"%";
+  }
+  calc();
+</script>
+</body>
+</html>
