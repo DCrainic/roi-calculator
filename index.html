@@ -5,100 +5,94 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ROI-Rechner – entitys.io</title>
 <style>
+  /* ===== Design System (green tones) ===== */
   :root{
-    --bg:#0f172a;        /* page background */
-    --ink:#0b1220;       /* dark text on light */
+    --bg:#0b1720;           /* page bg */
+    --bg-grad:radial-gradient(900px 600px at 10% -10%,#34d39922,transparent 60%),
+               radial-gradient(900px 600px at 120% 30%,#86efac22,transparent 60%),
+               var(--bg);
+    --card:#0f2222cc;       /* glass card */
+    --card-plain:#ffffff;   /* inner surfaces */
+    --ring:#134e4a;         /* borders */
+    --ink:#0b1720;          /* dark ink on light */
     --mut:#6b7280;
-    --card:#ffffff;      /* card surface */
-    --ring:#e2e8f0;      /* subtle borders */
-    --brand:#16a34a;     /* entitys green */
+    --brand:#10b981;        /* entitys green */
     --brand-2:#22c55e;
-    --accent:#2563eb;    /* slider and focus */
-    --chip:#e6f8ee;      /* badge bg */
-    --chip-ink:#047857;
-    --shadow:0 10px 30px rgba(2,6,23,.25);
-    --radius:16px;
+    --brand-3:#059669;
+    --chip:#ecfdf5; --chip-ink:#065f46; --chip-ring:#a7f3d0;
+    --shadow:0 12px 36px rgba(2,6,23,.35);
+    --radius:18px;
   }
   *{box-sizing:border-box}
-  html,body{height:100%}
   body{
-    margin:0;
-    font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-    color:var(--ink);
-    background:
-      radial-gradient(1200px 700px at 10% -10%, #34d39922 0, #0000 60%),
-      radial-gradient(1200px 700px at 110% 20%, #60a5fa22 0, #0000 60%),
-      #0b1020;
+    margin:0;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+    background:var(--bg-grad); color:#e6f6ef;
   }
-  .wrap{max-width:1100px;margin:28px auto;padding:0 18px}
+  .wrap{max-width:1120px;margin:28px auto;padding:0 18px}
   .hero{
-    background:linear-gradient(180deg, #ffffff, #f8fafc);
-    border:1px solid var(--ring); border-radius:22px; padding:22px;
-    box-shadow:var(--shadow)
+    background:linear-gradient(180deg,#0d1f1f,#0f1f1f80);
+    border:1px solid #113d3b66; border-radius:22px; padding:24px; box-shadow:var(--shadow);
+    backdrop-filter:blur(6px)
   }
-  h1{margin:0 0 8px; text-align:center; font-size:28px; letter-spacing:.2px}
-  .sub{margin:0 auto 14px; text-align:center; color:#4b5563}
+  h1{margin:0 0 6px;text-align:center;font-size:28px;letter-spacing:.2px}
+  .sub{margin:0 auto 16px;text-align:center;color:#b7d7cd}
 
-  .grid{display:grid; gap:18px}
-  @media(min-width:980px){ .grid{grid-template-columns:1fr 1fr} }
+  .grid{display:grid;gap:18px}
+  @media(min-width:980px){.grid{grid-template-columns:1fr 1fr}}
 
   .card{
-    background:var(--card);
-    border:1px solid var(--ring);
-    border-radius:var(--radius);
-    padding:18px;
-    box-shadow:0 6px 22px rgba(15,23,42,.08)
+    background:linear-gradient(180deg,#ffffff,#f6fffb);
+    border:1px solid #c9f4e3; border-radius:var(--radius); padding:18px; color:var(--ink)
   }
 
-  /* Inputs */
-  .row{display:grid; grid-template-columns:1fr 120px auto; gap:10px; align-items:center; margin:10px 0}
-  .row .unit{color:#475569}
+  /* ===== Inputs ===== */
+  .row{display:grid;grid-template-columns:1fr 120px auto;gap:10px;align-items:center;margin:12px 0}
+  .unit{color:#475569}
   input[type=number]{
-    width:120px; padding:10px 12px; border:1px solid var(--ring); border-radius:12px; font-size:16px;
-    background:#fff; outline:0; transition:box-shadow .15s,border-color .15s
+    width:120px;padding:10px 12px;border:1px solid #d1fae5;border-radius:12px;font-size:16px;
+    background:#fff;outline:0;transition:box-shadow .15s,border-color .15s
   }
-  input[type=number]:focus{border-color:#bfdbfe; box-shadow:0 0 0 4px #dbeafe}
+  input[type=number]:focus{border-color:#86efac;box-shadow:0 0 0 5px #dcfce7}
 
   .full{grid-column:1/-1}
-  input[type=range]{width:100%; -webkit-appearance:none; background:transparent}
-  input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#60a5fa)}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid #1d4ed8;margin-top:-6px;box-shadow:0 4px 12px rgba(2,6,23,.25)}
-  input[type=range]::-moz-range-track{height:8px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#60a5fa)}
-  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:#fff;border:2px solid #1d4ed8}
+  input[type=range]{width:100%;-webkit-appearance:none;background:transparent}
+  input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:999px;background:linear-gradient(90deg,#34d399,#22c55e)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid #10b981;margin-top:-6px;box-shadow:0 6px 18px rgba(16,185,129,.35)}
+  input[type=range]::-moz-range-track{height:10px;border-radius:999px;background:linear-gradient(90deg,#34d399,#22c55e)}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid #10b981}
 
-  .section-title{margin:14px 0 8px; font-weight:700; color:#111827}
-  .mut{color:#6b7280; margin:8px 0 6px}
+  .section-title{margin:10px 0 6px;font-weight:700;color:#0f172a}
+  .mut{color:#475569;margin:10px 0 6px}
 
   /* Pills */
   .pills{display:flex;flex-wrap:wrap;gap:10px}
   .pill{
-    border:1px solid #86efac; color:#166534; background:#f0fdf4;
-    padding:8px 14px; border-radius:999px; cursor:pointer; user-select:none;
-    transition:transform .08s ease, background .2s
+    border:1px solid #bbf7d0;color:#065f46;background:#f0fdf4;
+    padding:8px 14px;border-radius:999px;cursor:pointer;user-select:none;
+    transition:transform .08s ease,box-shadow .12s ease,background .2s
   }
-  .pill:hover{transform:translateY(-1px)}
-  .pill.on{background:linear-gradient(180deg,var(--brand-2),var(--brand)); color:#fff; border-color:transparent}
+  .pill:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(4,120,87,.15)}
+  .pill.on{background:linear-gradient(180deg,var(--brand-2),var(--brand));color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(16,185,129,.35)}
 
-  /* Output side */
-  .stat{display:flex; justify-content:space-between; gap:16px; padding:6px 0}
-  .big{font-weight:700; font-size:22px}
-  .badge{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px;
-    background:var(--chip); color:var(--chip-ink); border:1px solid #bbf7d0; font-weight:600}
+  /* ===== Output ===== */
+  .stat{display:flex;justify-content:space-between;gap:16px;padding:6px 0}
+  .big{font-weight:800;font-size:24px}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;
+    background:var(--chip);color:var(--chip-ink);border:1px solid var(--chip-ring);font-weight:700}
 
-  .meter{height:14px; background:#e5e7eb; border-radius:999px; overflow:hidden}
-  .mbar{height:100%; background:#334155}
-  .mimp{height:100%; background:linear-gradient(90deg,#0ea5e9,#22c55e)}
-  .labels{display:flex; justify-content:space-between; color:#6b7280; font-size:12px; margin-top:6px}
+  .meter{height:14px;background:#e7f6ef;border-radius:999px;overflow:hidden}
+  .mbar{height:100%;background:#475569}
+  .mimp{height:100%;background:linear-gradient(90deg,#10b981,#22c55e)}
+  .labels{display:flex;justify-content:space-between;color:#6b7280;font-size:12px;margin-top:6px}
 
-  /* Footer mini tips */
-  .tips{margin-top:10px; color:#6b7280; font-size:12px}
+  .tips{margin-top:10px;color:#6b7280;font-size:12px}
 
-  /* Compact embed mode for iframes */
+  /* ===== Compact embed mode ===== */
   body.embed .wrap{margin:12px auto}
-  body.embed .hero{padding:16px; border-radius:18px}
+  body.embed .hero{padding:16px;border-radius:18px}
   body.embed h1{font-size:22px}
   body.embed .card{padding:14px}
-  body.embed .row{grid-template-columns:1fr 100px auto; gap:8px; margin:8px 0}
+  body.embed .row{grid-template-columns:1fr 100px auto;gap:8px;margin:8px 0}
   body.embed input[type=number]{width:100px;padding:8px 10px}
   body.embed .badge{padding:8px 12px}
   body.embed .meter{height:12px}
@@ -152,25 +146,26 @@
         <button class="pill" data-v="2">Hoch</button>
         <button class="pill" data-v="3">Deaktivieren</button>
       </div>
-      <p class="tips">Tipp: „Hoch“ bedeutet starke Automatisierung, „Deaktivieren“ = Prozess entfällt.</p>
+      <p class="tips">Tipp: „Hoch“ = starke Automatisierung, „Deaktivieren“ = Prozess entfällt.</p>
     </section>
 
     <!-- RIGHT: Output -->
     <section class="card" id="out">
       <div class="stat"><div>Personalkosten im Stammdatenmanagement</div><div class="big" id="cost">€0</div></div>
       <div class="stat"><div>Ø Automatisierungsgrad</div><div id="lvl">Niedrig</div></div>
-      <div style="display:flex;justify-content:center;margin:10px 0 14px">
+
+      <div style="display:flex;justify-content:center;margin:10px 0 16px">
         <div class="badge" id="save">Einsparpotenzial: €0k p.a.</div>
       </div>
 
       <div style="margin-top:6px">
-        <div style="text-align:center;margin-bottom:6px;color:#475569">Time-to-market</div>
+        <div style="text-align:center;margin-bottom:6px;color:#334155">Time-to-market</div>
         <div class="meter"><div class="mbar" id="tqs" style="width:30%"></div><div class="mimp" id="tqe" style="width:60%"></div></div>
         <div class="labels"><span>Status quo</span><span>Verbesserung</span></div>
       </div>
 
       <div style="margin-top:14px">
-        <div style="text-align:center;margin-bottom:6px;color:#475569">Qualität</div>
+        <div style="text-align:center;margin-bottom:6px;color:#334155">Qualität</div>
         <div class="meter"><div class="mbar" id="qqs" style="width:30%"></div><div class="mimp" id="qqe" style="width:56%"></div></div>
         <div class="labels"><span>Status quo</span><span>Verbesserung</span></div>
       </div>
@@ -185,59 +180,48 @@
 
   const $=q=>document.querySelector(q);
   const fmt=n=>"€"+n.toLocaleString("de-DE");
-  const levels=["Niedrig","Mittel","Hoch","Deaktiviert"];
-  const effMap=[.30,.45,.60,0]; // expected savings share
-  // simple count-up animation for numbers
-  function animateNum(el,target,dur=420){
+  const effMap=[.30,.45,.60,0]; // same calculations
+  const levelNames=["Niedrig","Mittel","Hoch","Deaktiviert"];
+
+  // Number animation
+  function animate(el,target,dur=420){
     const start=parseFloat((el.dataset.v||"0").replace(/\./g,"").replace(",","."));
     const t0=performance.now();
     const step=now=>{
-      const p=Math.min(1,(now-t0)/dur);
-      const v=start+(target-start)*p;
+      const p=Math.min(1,(now-t0)/dur),v=start+(target-start)*p;
       el.textContent=fmt(Math.round(v));
       if(p<1) requestAnimationFrame(step); else el.dataset.v=target;
-    };
-    requestAnimationFrame(step);
+    }; requestAnimationFrame(step);
   }
 
-  // slider<->number sync
-  function bindPair(num,range,fn){
-    const sync=v=>{num.value=v;range.value=v;fn()};
-    num.addEventListener("input",()=>sync(num.value));
-    range.addEventListener("input",()=>sync(range.value));
-  }
+  // Bind slider<->number
+  function bindPair(n,r,cb){const sync=v=>{n.value=v;r.value=v;cb()};n.oninput=()=>sync(n.value);r.oninput=()=>sync(r.value);}
+  bindPair($("#w"),$("#wR"),calc); bindPair($("#p"),$("#pR"),calc);
 
-  // pill groups
-  function bindPills(id,fn){
+  // Pill groups
+  function bindPills(id,cb){
     const g=$(id);
     g.addEventListener("click",e=>{
       const b=e.target.closest(".pill"); if(!b) return;
       [...g.querySelectorAll(".pill")].forEach(x=>x.classList.toggle("on",x===b));
-      g.dataset.v=b.dataset.v; fn();
+      g.dataset.v=b.dataset.v; cb();
     });
     g.dataset.v="0";
   }
-
-  const numW=$("#w"), rngW=$("#wR"), numP=$("#p"), rngP=$("#pR");
-  bindPair(numW,rngW,calc); bindPair(numP,rngP,calc);
   bindPills("#g1",calc); bindPills("#g2",calc); bindPills("#g3",calc);
-
-  function gv(gsel){ return +$(gsel).dataset.v || 0; }
+  const val = sel => +$(sel).dataset.v||0;
 
   function calc(){
-    const w=+numW.value||0;
-    const p=+numP.value||0;
-    const eff=(effMap[gv("#g1")]+effMap[gv("#g2")]+effMap[gv("#g3")])/3;
+    const w=+$("#w").value||0, p=+$("#p").value||0;
+    const eff=(effMap[val("#g1")]+effMap[val("#g2")]+effMap[val("#g3")])/3;
     const cost=w*p*1000, save=cost*eff;
 
-    animateNum($("#cost"),cost);
-    $("#lvl").textContent = (Math.max(gv("#g1"),gv("#g2"),gv("#g3"))===3) ? "Deaktiviert"
-                          : eff<.38? "Niedrig" : eff<.53? "Mittel" : "Hoch";
-    $("#save").textContent = "Einsparpotenzial: "+fmt(Math.round(save/1000))+"k p.a.";
+    animate($("#cost"),cost);
+    const lvlIdx = (Math.max(val("#g1"),val("#g2"),val("#g3"))===3) ? 3 : eff<.38?0:eff<.53?1:2;
+    $("#lvl").textContent=levelNames[lvlIdx];
+    $("#save").textContent="Einsparpotenzial: "+fmt(Math.round(save/1000))+"k p.a.";
 
-    // progress impressions
-    $("#tqs").style.width="30%";
-    $("#qqs").style.width="30%";
+    $("#tqs").style.width="30%"; $("#qqs").style.width="30%";
     $("#tqe").style.width=Math.min(100,30+eff*70)+"%";
     $("#qqe").style.width=Math.min(100,30+eff*60)+"%";
   }
